@@ -16,7 +16,7 @@ export default function Navbar() {
           <h1 className="text-2xl font-bold text-gray-900">E-Comm</h1>
         </div>
 
-        <nav className="absolute top-[17.27px] left-[407.4px] w-[804px] h-[40px] flex gap-20 text-lg font-medium text-gray-700">
+        <nav className="absolute top-[17.27px] left-[407.4px] w-[804px] h-[40px] flex gap-20 text-lg font-medium text-gray-700 ">
           <a className="hover:text-blue-600" href="#">HOME</a>
           <a className="hover:text-blue-600" href="#">BAG</a>
           <a className="hover:text-blue-600" href="#">SNEAKERS</a>
