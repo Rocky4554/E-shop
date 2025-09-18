@@ -1,0 +1,94 @@
+import React, { useState, useRef } from "react";
+
+const DualRangeSlider = ({ priceRange, onPriceChange }) => {
+  const [dragging, setDragging] = useState(null);
+  const sliderRef = useRef(null);
+
+  const min = 0;
+  const max = 1000;
+  const minValue = priceRange[0];
+  const maxValue = priceRange[1];
+
+  // Convert value to percentage
+  const toPercent = (val) => ((val - min) / (max - min)) * 100;
+
+  // Handle mouse down
+  const startDrag = (e, type) => {
+    setDragging(type);
+
+    const move = (e) => {
+      if (!sliderRef.current) return;
+
+      const rect = sliderRef.current.getBoundingClientRect();
+      let percent = (e.clientX - rect.left) / rect.width;
+      percent = Math.min(Math.max(percent, 0), 1); // clamp between 0 and 1
+      const value = Math.round(min + percent * (max - min));
+
+      if (type === "min") {
+        onPriceChange([Math.min(value, maxValue), maxValue]);
+      } else {
+        onPriceChange([minValue, Math.max(value, minValue)]);
+      }
+    };
+
+    const stop = () => {
+      setDragging(null);
+      document.removeEventListener("mousemove", move);
+      document.removeEventListener("mouseup", stop);
+    };
+
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseup", stop);
+  };
+
+  return (
+    <div className="mt-6 bg-neutral-100 p-4 rounded-sm">
+      <h3 className="text-lg font-medium mb-2">Price</h3>
+
+      <div className="text-sm mb-4">
+        <span>Range: </span>
+        ${minValue.toFixed(2)} - ${maxValue.toFixed(2)}
+      </div>
+
+      <div className="relative h-6 flex items-center">
+        <div
+          ref={sliderRef}
+          className="w-full h-2 bg-gray-300 rounded-full relative"
+        >
+          {/* Active bar */}
+          <div
+            className="absolute h-2 bg-blue-500 rounded-full"
+            style={{
+              left: `${toPercent(minValue)}%`,
+              width: `${toPercent(maxValue) - toPercent(minValue)}%`,
+            }}
+          />
+
+          {/* Min thumb */}
+          <div
+            className="absolute w-4 h-4 bg-blue-500 rounded-full cursor-pointer border-2 border-white shadow"
+            style={{
+              left: `${toPercent(minValue)}%`,
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onMouseDown={(e) => startDrag(e, "min")}
+          />
+
+          {/* Max thumb */}
+          <div
+            className="absolute w-4 h-4 bg-blue-500 rounded-full cursor-pointer border-2 border-white shadow"
+            style={{
+              left: `${toPercent(maxValue)}%`,
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onMouseDown={(e) => startDrag(e, "max")}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DualRangeSlider;

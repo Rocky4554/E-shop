@@ -129,6 +129,7 @@
 /////////////
 
 import React, { useState } from "react";
+import DualRangeSlider from "./PriceSlider";
 
 export default function Sidebar({
   categories,
@@ -139,6 +140,8 @@ export default function Sidebar({
   priceRange,
   onPriceChange,
   onResetFilters,
+  totalItems,
+  categoryCounts,
 }) {
   const [openCats, setOpenCats] = useState(true);
   const [openCategories, setOpenCategories] = useState(false);
@@ -207,6 +210,7 @@ export default function Sidebar({
                 aria-expanded={openCats}
               >
                 <span>All Categories</span>
+                <span className="text-gray-500">({totalItems})</span>
                 {openCats ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -241,18 +245,21 @@ export default function Sidebar({
               </button>
 
               {openCats && (
-                <ul className="space-y-2 text-sm ml-3">
+                <ul className="space-y-2 text-sm">
                   {categories.map((c) => (
                     <li key={c}>
                       <button
                         onClick={() => onCategoryChange(c)}
-                        className={`w-full text-left py-1 px-2 rounded ${
+                        className={`w-full text-left py-1 px-2 rounded flex justify-between ${
                           selectedCategory === c
-                            ? "bg-blue-50"
-                            : "hover:bg-gray-300"
+                            ? "bg-blue-100"
+                            : "hover:text-blue-600"
                         }`}
                       >
-                        {c}
+                        {c}{" "}
+                        <span className="text-gray-500">
+                          {categoryCounts[c]}
+                        </span>
                       </button>
                     </li>
                   ))}
@@ -261,15 +268,14 @@ export default function Sidebar({
             </div>
           )}
         </div>
-
         {/* Price */}
-        <div className="mt-6 bg-neutral-100 p-4 rounded-sm">
+        {/* <div className="mt-6 bg-neutral-100 p-4 rounded-sm">
           <h3 className="text-lg font-medium mb-2">Price</h3>
           <div className="text-sm mb-2">
-            {/* <span className="mr-2">${priceRange[0]}</span> - {" "} */}
+            <span className="mr-2">${priceRange[0]}</span> - {" "}
             <span className="ml-2">${priceRange[1]}</span>
           </div>
-          {/* <input
+          <input
             aria-label="min price"
             type="range"
             min="0"
@@ -279,7 +285,7 @@ export default function Sidebar({
               onPriceChange([Number(e.target.value), priceRange[1]])
             }
             className="w-full"
-          /> */}
+          />
           <input
             aria-label="max price"
             type="range"
@@ -291,8 +297,11 @@ export default function Sidebar({
             }
             className="w-full"
           />
-        </div>
-
+        </div> */}
+        <DualRangeSlider
+          priceRange={priceRange}
+          onPriceChange={onPriceChange}
+        />
         {/* Colors */}
         <div className="mt-6 bg-neutral-100 p-4 rounded-sm">
           <h3 className="text-lg font-medium mb-2">Colors</h3>
@@ -323,7 +332,6 @@ export default function Sidebar({
             ))}
           </div>
         </div>
-
         {/* Brands */}
         <div className="bg-neutral-100 p-4 rounded-sm mt-6">
           <button
@@ -384,7 +392,6 @@ export default function Sidebar({
             </ul>
           )}
         </div>
-
         {/* Reset Filters */}
         <div className="mt-6">
           <button
