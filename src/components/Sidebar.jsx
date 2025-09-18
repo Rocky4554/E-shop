@@ -1,0 +1,95 @@
+import React, { useState } from "react";
+
+export default function Sidebar({
+  categories,
+  selectedCategory,
+  onCategoryChange,
+  onColorChange,
+  selectedColor,
+  priceRange,
+  onPriceChange,
+  onResetFilters
+}) {
+  const [openCats, setOpenCats] = useState(true);
+
+  const colorOptions = ["blue", "red", "black", "yellow", "pink", "brown", "beige", "green", "white"];
+
+  return (
+    <aside className="md:w-72 w-full">
+      <div className="p-4 border rounded-md bg-white">
+        <h3 className="font-semibold mb-3">Categories</h3>
+        <button
+          className="text-sm mb-2 inline-flex items-center gap-2"
+          onClick={() => setOpenCats((s) => !s)}
+          aria-expanded={openCats}
+        >
+          {openCats ? "▾" : "▸"} All Categories
+        </button>
+        {openCats && (
+          <ul className="space-y-2 text-sm">
+            {categories.map((c) => (
+              <li key={c}>
+                <button
+                  onClick={() => onCategoryChange(c)}
+                  className={`w-full text-left py-1 px-2 rounded ${selectedCategory === c ? "bg-blue-50" : "hover:bg-gray-50"}`}
+                >
+                  {c}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-6">
+          <h3 className="font-semibold mb-2">Price</h3>
+          <div className="text-sm mb-2">
+            <span className="mr-2">${priceRange[0]}</span> - <span className="ml-2">${priceRange[1]}</span>
+          </div>
+          <input
+            aria-label="min price"
+            type="range"
+            min="0"
+            max="500"
+            value={priceRange[0]}
+            onChange={(e) => onPriceChange([Number(e.target.value), priceRange[1]])}
+            className="w-full"
+          />
+          <input
+            aria-label="max price"
+            type="range"
+            min="0"
+            max="1000"
+            value={priceRange[1]}
+            onChange={(e) => onPriceChange([priceRange[0], Number(e.target.value)])}
+            className="w-full mt-2"
+          />
+        </div>
+
+        <div className="mt-6">
+          <h3 className="font-semibold mb-2">Colors</h3>
+          <div className="flex flex-wrap gap-2">
+            {colorOptions.map((c) => (
+              <button
+                key={c}
+                onClick={() => onColorChange(c === selectedColor ? "" : c)}
+                className={`w-7 h-7 rounded-full border flex items-center justify-center focus:outline-none ${selectedColor === c ? "ring-2 ring-offset-2 ring-blue-400" : ""}`}
+                aria-pressed={selectedColor === c}
+                title={c}
+              >
+                <span className="sr-only">{c}</span>
+                <span style={{
+                  width: 20, height: 20, borderRadius: 999,
+                  backgroundColor: c === "brown" ? "#b5651d" : c === "beige" ? "#f5e6c8" : c
+                }} />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <button onClick={onResetFilters} className="px-3 py-2 bg-gray-100 rounded text-sm">Reset Filters</button>
+        </div>
+      </div>
+    </aside>
+  );
+}
