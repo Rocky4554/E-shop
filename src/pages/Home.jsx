@@ -502,7 +502,7 @@ export default function Home() {
   // local filter state
   const [selectedCategory, setSelectedCategory] = useState("");
   const [priceRange, setPriceRange] = useState([0, 1000]);
-  const [perPage, setPerPage] = useState(12);
+  const [perPage, setPerPage] = useState(6);
 
   // derive categories from data
   const categories = useMemo(() => {
@@ -817,7 +817,7 @@ export default function Home() {
                   <select
                     value={queryState.sort}
                     onChange={handleSortChange}
-                    className="shadow px-2 py-1 text-sm m-2"
+                    className="shadow px-2 py-1 text-sm m-2 cursor-pointer"
                   >
                     <option value="name_asc">Name (A → Z)</option>
                     <option value="name_desc">Name (Z → A)</option>
@@ -832,7 +832,7 @@ export default function Home() {
                   <select
                     value={perPage}
                     onChange={(e) => setPerPage(Number(e.target.value))}
-                    className="shadow px-2 py-1 text-sm m-2"
+                    className="shadow px-2 py-1 text-sm m-2 cursor-pointer"
                   >
                     <option value={6}>6</option>
                     <option value={12}>12</option>
@@ -844,7 +844,7 @@ export default function Home() {
               <div className="flex items-center gap-3 p-2">
                 <div className="hidden md:flex items-center gap-2">
                  
-                  <button className="p-2 hover:bg-neutral-200 rounded">
+                  <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -868,7 +868,7 @@ export default function Home() {
                       <circle cx="5" cy="19" r="1" />
                     </svg>
                   </button>
-                   <button className="p-2 hover:bg-neutral-200 rounded">
+                   <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -917,7 +917,7 @@ export default function Home() {
             </div>
 
             {/* Pagination row sticks bottom of column */}
-            <div className="mt-6 flex items-center justify-between">
+            <div className="mt-6 flex items-center justify-between ">
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
