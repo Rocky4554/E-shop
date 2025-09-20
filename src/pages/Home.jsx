@@ -590,127 +590,6 @@ export default function Home() {
   }
 
   return (
-    // <div className="max-h-screen flex flex-col bg-white">
-    //   <Navbar />
-
-    //   {/* main grows to push footer down */}
-    //   <main className="flex-1 max-w-7xl mx-auto md:py-6 w-full">
-    //     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-    //       {/* Sidebar */}
-    //       <div className="md:col-span-1">
-    //         <Sidebar
-    //           categories={categories}
-    //           categoryCounts={categoryCounts}
-    //           totalItems={totalItems}
-    //           selectedCategory={selectedCategory}
-    //           onCategoryChange={(c) =>
-    //             setSelectedCategory((prev) => (prev === c ? "" : c))
-    //           }
-    //           onColorChange={handleColorChange}
-    //           selectedColor={queryState.color}
-    //           priceRange={priceRange}
-    //           onPriceChange={setPriceRange}
-    //           onResetFilters={handleResetFilters}
-    //         />
-    //       </div>
-
-    //       {/* Content */}
-    //       <div className="col-span-1 md:col-span-3 flex flex-col">
-    //         {/* Hero image */}
-    //         <div className="bg-blue-400 h-44 p-6 flex items-center justify-between text-white mb-6">
-    //           <div>
-    //             <h2 className="text-2xl font-bold">Adidas Men Running</h2>
-    //             <p className="text-sm opacity-90">
-    //               Sneakers — Performance and design. Taken right to the edge.
-    //             </p>
-    //           </div>
-    //           <div className="w-40 h-40 bg-white rounded-md flex items-center justify-center">
-    //             <img src="https://picsum.photos/seed/hero/300/180" alt="hero" />
-    //           </div>
-    //         </div>
-
-    //         {/* Controls */}
-    //         <div className="flex flex-col md:flex-row items-center justify-between gap-3 mb-4">
-    //           <div className="flex items-center gap-3">
-    //             <div className="text-sm text-gray-700">
-    //               {sorted.length} Items
-    //             </div>
-    //             <label className="text-sm">Sort By</label>
-    //             <select
-    //               value={queryState.sort}
-    //               onChange={handleSortChange}
-    //               className="border rounded px-2 py-1 text-sm"
-    //             >
-    //               <option value="name_asc">Name (A → Z)</option>
-    //               <option value="name_desc">Name (Z → A)</option>
-    //               <option value="price_asc">Price (Low → High)</option>
-    //               <option value="price_desc">Price (High → Low)</option>
-    //               <option value="popularity_desc">Popularity</option>
-    //             </select>
-    //           </div>
-
-    //           <div className="flex items-center gap-3">
-    //             <label>Show</label>
-    //             <select
-    //               value={perPage}
-    //               onChange={(e) => setPerPage(Number(e.target.value))}
-    //               className="border rounded px-2 py-1 text-sm"
-    //             >
-    //               <option value={6}>6</option>
-    //               <option value={12}>12</option>
-    //               <option value={24}>24</option>
-    //             </select>
-    //             <div className="hidden md:flex items-center gap-2">
-    //               <button className="p-2 border rounded">☰</button>
-    //               <button className="p-2 border rounded">▦</button>
-    //             </div>
-    //           </div>
-    //         </div>
-
-    //         {/* Products */}
-    //         <div className="flex-1">
-    //           {visible.length === 0 ? (
-    //             <div className="p-6 bg-white rounded-md text-center">
-    //               <p className="mb-3">No products match your filters.</p>
-    //               <button
-    //                 onClick={handleResetFilters}
-    //                 className="px-3 py-2 bg-blue-500 text-white rounded"
-    //               >
-    //                 Reset filters
-    //               </button>
-    //             </div>
-    //           ) : (
-    //             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    //               {visible.map((p) => (
-    //                 <div
-    //                   key={p.id}
-    //                   className="w-full max-w-[328px] h-[408px] bg-white rounded shadow mx-auto"
-    //                 >
-    //                   <ProductCard product={p} activeColor={queryState.color} />
-    //                 </div>
-    //               ))}
-    //             </div>
-    //           )}
-    //         </div>
-
-    //         {/* Pagination row sticks bottom of column */}
-    //         <div className="mt-6 flex items-center justify-between">
-    //           <Pagination
-    //             currentPage={currentPage}
-    //             totalPages={totalPages}
-    //             onPageChange={handlePageChange}
-    //           />
-    //           <button className="text-blue-500 font-medium">
-    //             More Options
-    //           </button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </main>
-
-    //   <Footer />
-    // </div>
-
     <div className="max-h-screen flex flex-col bg-white">
       <Navbar />
 
@@ -737,44 +616,13 @@ export default function Home() {
 
           {/* Content */}
           <div className="col-span-1 md:col-span-3 flex flex-col">
-            {/* <div
-              className="bg-blue-400 p-8 flex items-center justify-between text-white mb-8 relative"
-              style={{
-                width: "100%",
-                height: "350px",
-                background: "linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%)",
-              }}
-            >
-              <div className="flex-1 mt-8">
-                <div className="mb-4">
-                  <h2 className="text-4xl font-bold">Adidas Men Running</h2>
-                <h3 className="text-4xl font-bold">Sneakers</h3>
-                <p className="text-lg opacity-90 px--1">
-                  Performance and design. Taken right to the edge.
-                </p>
-                </div>
-                
-                <button className="bg-rgba(64, 191, 255, 1) bg-opacity-20 py-2 rounded text-white font-medium transition-all duration-200 underline">
-                  SHOP NOW
-                </button>
-              </div>
-
-              
-              <div className="flex-shrink-0 ml-8">
-                <img
-                  src="/shoe.png"
-                  alt="Adidas Running Sneaker"
-                  className="w-[442px] h-[221px] object-contain"
-                />
-              </div>
-            </div> */}
 
             {/* Hero Image */}
             <div
               className="bg-blue-400 p-8 flex flex-col md:flex-row items-center justify-between text-white mb-4 relative"
               style={{
                 width: "100%",
-                height: "auto", // let height adapt
+                height: "auto", 
                 background: "linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%)",
               }}
             >
@@ -806,7 +654,7 @@ export default function Home() {
             </div>
 
             {/* Sorting filters */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3 mb-4 bg-neutral-100 h-12 rounded">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 mb-4 bg-neutral-100 h-[62.57px] rounded">
               <div className="flex items-center gap-8 p-4">
                 <div className="text-sm text-gray-900">
                   {sorted.length} Items
@@ -843,7 +691,6 @@ export default function Home() {
 
               <div className="flex items-center gap-3 p-2">
                 <div className="hidden md:flex items-center gap-2">
-                 
                   <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -868,7 +715,7 @@ export default function Home() {
                       <circle cx="5" cy="19" r="1" />
                     </svg>
                   </button>
-                   <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
+                  <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -890,7 +737,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Products */}
+            {/* Product*/}
             <div className="flex-1">
               {visible.length === 0 ? (
                 <div className="p-6 bg-white rounded-md text-center">
@@ -916,16 +763,15 @@ export default function Home() {
               )}
             </div>
 
-            {/* Pagination row sticks bottom of column */}
-            <div className="mt-6 flex items-center justify-between ">
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-              <button className="text-blue-500 font-medium">
-                More Options
-              </button>
+           
+            <div className="mt-6 flex justify-center">
+              <div className="w-[1070px] h-[68.56px] bg-neutral-100 flex items-center justify-center rounded">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
             </div>
           </div>
         </div>
