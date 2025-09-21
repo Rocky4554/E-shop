@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 
 const DualRangeSlider = ({ priceRange, onPriceChange }) => {
@@ -12,15 +13,22 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
   // Convert value to percentage
   const toPercent = (val) => ((val - min) / (max - min)) * 100;
 
-  // Handle mouse down
+  // Get client X from mouse or touch event
+  const getClientX = (e) => {
+    return e.touches ? e.touches[0].clientX : e.clientX;
+  };
+
+  // Handle start drag (both mouse and touch)
   const startDrag = (e, type) => {
+    e.preventDefault(); // Prevent default touch behavior
     setDragging(type);
 
     const move = (e) => {
       if (!sliderRef.current) return;
-
+      
+      const clientX = getClientX(e);
       const rect = sliderRef.current.getBoundingClientRect();
-      let percent = (e.clientX - rect.left) / rect.width;
+      let percent = (clientX - rect.left) / rect.width;
       percent = Math.min(Math.max(percent, 0), 1); // clamp between 0 and 1
       const value = Math.round(min + percent * (max - min));
 
@@ -33,12 +41,18 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
 
     const stop = () => {
       setDragging(null);
+      // Remove both mouse and touch event listeners
       document.removeEventListener("mousemove", move);
       document.removeEventListener("mouseup", stop);
+      document.removeEventListener("touchmove", move);
+      document.removeEventListener("touchend", stop);
     };
 
+    // Add both mouse and touch event listeners
     document.addEventListener("mousemove", move);
     document.addEventListener("mouseup", stop);
+    document.addEventListener("touchmove", move, { passive: false });
+    document.addEventListener("touchend", stop);
   };
 
   return (
@@ -55,7 +69,7 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
           ref={sliderRef}
           className="w-full h-2 bg-gray-300 rounded-full relative"
         >
-          {/* Active bar */}
+         
           <div
             className="absolute h-2 bg-blue-500 rounded-full"
             style={{
@@ -64,26 +78,28 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
             }}
           />
 
-          {/* Min thumb */}
+          
           <div
-            className="absolute w-4 h-4 bg-blue-500 rounded-full cursor-pointer border-2 border-white shadow"
+            className="absolute w-4 h-4 bg-blue-500 rounded-full cursor-pointer border-2 border-white shadow touch-none"
             style={{
               left: `${toPercent(minValue)}%`,
               top: "50%",
               transform: "translate(-50%, -50%)",
             }}
             onMouseDown={(e) => startDrag(e, "min")}
+            onTouchStart={(e) => startDrag(e, "min")}
           />
 
-          {/* Max thumb */}
+          
           <div
-            className="absolute w-4 h-4 bg-blue-500 rounded-full cursor-pointer border-2 border-white shadow"
+            className="absolute w-4 h-4 bg-blue-500 rounded-full cursor-pointer border-2 border-white shadow touch-none"
             style={{
               left: `${toPercent(maxValue)}%`,
               top: "50%",
               transform: "translate(-50%, -50%)",
             }}
             onMouseDown={(e) => startDrag(e, "max")}
+            onTouchStart={(e) => startDrag(e, "max")}
           />
         </div>
       </div>
