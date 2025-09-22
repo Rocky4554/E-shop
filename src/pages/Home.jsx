@@ -6,7 +6,7 @@ import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import Footer from "../components/Footer";
 import DualRangeSlider from "../components/PriceSlider";
-import { X, ArrowDownUp, Funnel, ArrowDownZA } from "lucide-react";
+import { X, ArrowDownUp, Funnel} from "lucide-react";
 
 // use code spliting for better performance
 

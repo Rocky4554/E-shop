@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Rating from "./Rating";
-import { HeartPlus } from "lucide-react";
+
 
 const colorMap = {
   blue: "bg-blue-500",
