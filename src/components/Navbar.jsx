@@ -10,10 +10,8 @@ export default function Navbar() {
       <div className="flex justify-between items-center h-16 mx-auto max-w-screen-xl p-4 md:p-1">
         
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center text-white font-bold text-lg">
-            E
-          </div>
+        <div className="flex items-center gap-2 cursor-pointer">
+           <img src="/images.png" alt="Logo" className="w-10 h-10 rounded-full border-black"/>
           <h1 className="text-2xl font-bold text-gray-900">E-Comm</h1>
         </div>
 
@@ -26,8 +24,8 @@ export default function Navbar() {
           <a className="hover:text-blue-600" href="#">CONTACT</a>
         </nav>
 
-        {/* Cart + Mobile Menu Button */}
-        <div className="flex items-center gap-5">
+        {/* Cart and Mobile Menu Button */}
+        <div className="flex items-center gap-5 cursor-pointer">
           <div className="flex items-center gap-2 text-sm text-gray-700">
             <ShoppingCart size={25} className="text-gray-950" />
             <span className="hidden sm:inline font-medium text-base">
@@ -35,7 +33,7 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* Hamburger (Mobile only) */}
+          {/* Dorpdown button on mobile */}
           <button
             className="md:hidden p-2 text-gray-700"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -45,7 +43,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile nav */}
       {mobileOpen && (
         <nav className="md:hidden flex flex-col items-center gap-6 py-6 text-lg font-medium text-gray-700 border-t border-gray-200 hover:bg-neutarl-200">
           <a href="#">HOME</a>

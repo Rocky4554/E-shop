@@ -4,6 +4,7 @@ export default function Rating({ value = 0, count = 0 }) {
   const full = Math.floor(value);
   const half = value - full >= 0.5;
   const totalStars = 5;
+  
   return (
     <div className="flex items-center gap-2 text-xs" aria-label={`Rating ${value} out of 5`}>
       <div className="flex items-center">

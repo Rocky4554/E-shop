@@ -1,5 +1,6 @@
 
 import React, { useState, useRef } from "react";
+//please read with patience code is messy here 
 
 const DualRangeSlider = ({ priceRange, onPriceChange }) => {
   const [dragging, setDragging] = useState(null);
@@ -10,17 +11,17 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
   const minValue = priceRange[0];
   const maxValue = priceRange[1];
 
-  // Convert value to percentage
+
   const toPercent = (val) => ((val - min) / (max - min)) * 100;
 
-  // Get client X from mouse or touch event
+
   const getClientX = (e) => {
     return e.touches ? e.touches[0].clientX : e.clientX;
   };
 
-  // Handle start drag (both mouse and touch)
+ 
   const startDrag = (e, type) => {
-    e.preventDefault(); // Prevent default touch behavior
+    e.preventDefault();
     setDragging(type);
 
     const move = (e) => {
@@ -29,7 +30,7 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
       const clientX = getClientX(e);
       const rect = sliderRef.current.getBoundingClientRect();
       let percent = (clientX - rect.left) / rect.width;
-      percent = Math.min(Math.max(percent, 0), 1); // clamp between 0 and 1
+      percent = Math.min(Math.max(percent, 0), 1);
       const value = Math.round(min + percent * (max - min));
 
       if (type === "min") {
@@ -41,14 +42,14 @@ const DualRangeSlider = ({ priceRange, onPriceChange }) => {
 
     const stop = () => {
       setDragging(null);
-      // Remove both mouse and touch event listeners
+     
       document.removeEventListener("mousemove", move);
       document.removeEventListener("mouseup", stop);
       document.removeEventListener("touchmove", move);
       document.removeEventListener("touchend", stop);
     };
 
-    // Add both mouse and touch event listeners
+    
     document.addEventListener("mousemove", move);
     document.addEventListener("mouseup", stop);
     document.addEventListener("touchmove", move, { passive: false });

@@ -5,6 +5,10 @@ export default function Sidebar({
   categories,
   selectedCategory,
   onCategoryChange,
+  selectedBrand,
+  onBrandChange,
+  selectedGender,
+  onGenderChange,
   onColorChange,
   selectedColor,
   priceRange,
@@ -12,9 +16,16 @@ export default function Sidebar({
   onResetFilters,
   totalItems,
   categoryCounts,
+  brands,
+  brandCounts,
+  genders,
+  genderCounts,
 }) {
   const [openCats, setOpenCats] = useState(true);
-  const [openCategories, setOpenCategories] = useState(false);
+  const [openCategories, setOpenCategories] = useState(true);
+  const [More, setMore] = useState(false);
+  const [Brands, setBrands] = useState(true);
+  const [Gender, setGender] = useState(true);
 
   const colorOptions = [
     "blue",
@@ -29,106 +40,50 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="hidden w-full md:w-auto md:block md:flex-shrink-0">
-      <div className="rounded-sm bg-white sticky top-24">
+    <aside className="hidden w-full md:w-auto md:block md:flex-shrink-0 ">
+      <div className="rounded-sm bg-white sticky top-24 ">
         {/* Categories */}
         <div className="bg-neutral-100 p-4 rounded-sm">
           <button
-            className="w-full flex items-center justify-between text-lg font-medium mb-3"
+            className="w-full flex items-center justify-between text-lg font-medium mb-3 cursor-pointer"
             onClick={() => setOpenCategories((s) => !s)}
             aria-expanded={openCategories}
           >
-            <span>Categories</span>
-            {openCategories ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-chevron-up"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-chevron-down"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            )}
+            <span className="text-[20px] font-poppins font-[500]">
+              All Categories
+            </span>
+            {openCategories ? <ChevronUp /> : <ChevronDown />}
           </button>
 
           {openCategories && (
-            <div>
+            <div className="mt-6">
               <button
-                className="text-sm mb-2 flex w-full items-center justify-between"
+                className="text-sm mb-2 flex w-full items-center justify-between cursor-pointer"
                 onClick={() => setOpenCats((s) => !s)}
                 aria-expanded={openCats}
               >
-                <span>All Categories</span>
+                <span className="text-[20px] font-poppins font-[500]">
+                  Hot Deals
+                </span>
                 <span className="text-gray-500">({totalItems})</span>
-                {openCats ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-chevron-up"
-                  >
-                    <path d="m18 15-6-6-6 6" />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-chevron-down"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                )}
+                {openCats ? <ChevronUp /> : <ChevronDown />}
               </button>
 
               {openCats && (
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-3 mt-6 text-sm">
                   {categories.map((c) => (
                     <li key={c}>
                       <button
                         onClick={() => onCategoryChange(c)}
-                        className={`w-full text-left py-1 px-2 rounded flex justify-between ${
+                        className={`w-full text-left py-2 px-2 text-[18px] font-[400] rounded flex justify-between cursor-pointer ${
                           selectedCategory === c
-                            ? "bg-blue-100"
+                            ? "bg-blue-100 text-blue-800 font-medium"
                             : "hover:text-blue-600"
                         }`}
                       >
-                        {c}{" "}
+                        {c}
                         <span className="text-gray-500">
-                          {categoryCounts[c]}
+                          {categoryCounts?.[c] || 0}
                         </span>
                       </button>
                     </li>
@@ -138,20 +93,22 @@ export default function Sidebar({
             </div>
           )}
         </div>
-       
+
+        {/* Price */}
         <DualRangeSlider
           priceRange={priceRange}
           onPriceChange={onPriceChange}
         />
-        {/* Colors */}
+
+        {/* Color */}
         <div className="mt-6 bg-neutral-100 p-4 rounded-sm">
-          <h3 className="text-lg font-medium mb-2">Colors</h3>
-          <div className="flex flex-wrap gap-2">
+          <h3 className="text-[20px] font-poppins font-[500]">COLORS</h3>
+          <div className="flex flex-wrap gap-2 mt-2">
             {colorOptions.map((c) => (
               <button
                 key={c}
                 onClick={() => onColorChange(c === selectedColor ? "" : c)}
-                className={`w-7 h-7 rounded-full border flex items-center justify-center focus:outline-none ${
+                className={`w-7 h-7 rounded-full shadow-2xl flex items-center justify-center focus:outline-none cursor-pointer ${
                   selectedColor === c
                     ? "ring-2 ring-offset-2 ring-blue-400"
                     : ""
@@ -173,76 +130,167 @@ export default function Sidebar({
             ))}
           </div>
         </div>
-        {/* Brands */}
+
+        {/* More Section */}
         <div className="bg-neutral-100 p-4 rounded-sm mt-6">
           <button
-            className="text-lg font-medium mb-2 flex w-full items-center justify-between"
-            onClick={() => setOpenCats((s) => !s)}
-            aria-expanded={openCats}
+            className="w-full flex items-center justify-between text-lg font-medium mb-3 cursor-pointer"
+            onClick={() => setMore((s) => !s)}
+            aria-expanded={More}
           >
-            <span>BRAND</span>
-            {openCats ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-chevron-up"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-chevron-down"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            )}
+            <span className="text-[20px] font-poppins font-[500]">More</span>
+            {More ? <ChevronUp /> : <ChevronDown />}
           </button>
 
-          {openCats && (
-            <ul className="space-y-2 text-sm">
-              {categories.map((c) => (
-                <li key={c}>
-                  <button
-                    onClick={() => onCategoryChange(c)}
-                    className={`w-full text-left py-1 rounded ${
-                      selectedCategory === c
-                        ? "bg-blue-50"
-                        : "hover:text-blue-600"
-                    }`}
-                  >
-                    {c}
-                  </button>
-                </li>
-              ))}
-            </ul>
+          {More && (
+            <>
+              {/* Brands */}
+              <div className="mt-6">
+                <button
+                  className="text-sm mb-2 flex w-full items-center justify-between cursor-pointer"
+                  onClick={() => setBrands((s) => !s)}
+                  aria-expanded={Brands}
+                >
+                  <span className="text-[20px] font-poppins font-[500]">
+                    Brands
+                  </span>
+                  {Brands ? <ChevronUp /> : <ChevronDown />}
+                </button>
+
+                {Brands && (
+                  <ul className="space-y-3 mt-6 text-sm">
+                    <li>
+                      <button
+                        onClick={() => onBrandChange("")}
+                        className={`w-full text-left py-2 px-2 text-[18px] font-[400] font-Proxima Nova rounded flex justify-between cursor-pointer${
+                          !selectedBrand
+                            ? "bg-blue-100 text-blue-800 font-medium"
+                            : "hover:text-blue-600 cursor-pointer"
+                        }`}
+                      >
+                        All Brands{" "}
+                        <span className="text-gray-500 cursor-pointer">({totalItems})</span>
+                      </button>
+                    </li>
+                    {brands.map((b) => (
+                      <li key={b}>
+                        <button
+                          onClick={() => onBrandChange(b)}
+                          className={`w-full text-left py-2 px-2 text-[18px] font-[400] font-Proxima Nova rounded flex justify-between ${
+                            selectedBrand === b
+                              ? "bg-blue-100 text-blue-800 font-medium"
+                              : "hover:bg-blue-50"
+                          }`}
+                        >
+                          {b}
+                          <span className="text-gray-500">
+                            {brandCounts?.[b] || 0}
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {/* Gender */}
+              <div className="mt-6">
+                <button
+                  className="text-sm mb-2 flex w-full items-center justify-between"
+                  onClick={() => setGender((s) => !s)}
+                  aria-expanded={Gender}
+                >
+                  <span className="text-[20px] font-poppins font-[500]">
+                    Gender
+                  </span>
+                  {Gender ? <ChevronUp /> : <ChevronDown />}
+                </button>
+
+                {Gender && (
+                  <ul className="space-y-3 mt-6 text-sm">
+                    <li>
+                      <button
+                        onClick={() => onGenderChange("")}
+                        className={`w-full text-left py-2 px-2 text-[18px] font-[400] font-Proxima Nova rounded flex justify-between ${
+                          !selectedGender
+                            ? "bg-blue-100 text-blue-800 font-medium"
+                            : "hover:text-blue-600"
+                        }`}
+                      >
+                        All Genders{" "}
+                        <span className="text-gray-500 cursor-pointer">({totalItems})</span>
+                      </button>
+                    </li>
+                    {genders.map((g) => (
+                      <li key={g}>
+                        <button
+                          onClick={() => onGenderChange(g)}
+                          className={`w-full text-left py-2 px-2 text-[18px] font-[400] font-Proxima Nova rounded flex justify-between cursor-pointer ${
+                            selectedGender === g
+                              ? "bg-blue-100 text-blue-800 font-medium"
+                              : "hover:bg-blue-50"
+                          }`}
+                        >
+                          {g}
+                          <span className="text-gray-500">
+                            {genderCounts?.[g] || 0}
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </>
           )}
         </div>
+
         {/* Reset Filters */}
         <div className="mt-6">
           <button
             onClick={onResetFilters}
-            className="px-3 py-2 bg-gray-100 rounded text-sm"
+            className="px-3 py-2 bg-gray-100 rounded text-sm cursor-pointer"
           >
             Reset Filters
           </button>
         </div>
       </div>
     </aside>
+  );
+}
+
+function ChevronUp() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  );
+}
+
+function ChevronDown() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
   );
 }
