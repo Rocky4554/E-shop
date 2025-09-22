@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Rating from "./Rating";
-
+import HotBadge from "./HotBadge";
 
 const colorMap = {
   blue: "bg-blue-500",
@@ -25,22 +25,17 @@ export default function ProductCard({ product, activeColor }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {product.isHot && (
-        <span className="absolute top-0 left-0 bg-[rgba(255,72,88,1)] text-white text-sm w-[69.74px] h-[34.7px] flex items-center justify-center z-20">
-          HOT
-        </span>
-      )}
+      <HotBadge isVisible={product.isHot} />
 
       <div className="w-full h-[286.55px] overflow-hidden relative">
         <img
           src={product.imageUrl}
           alt={product.name}
-         
           className="sm:object-cover w-full h-full"
           loading="lazy"
         />
 
-        {/*Color Options when select colrs */}
+        {/*Color Options when select colors */}
         {colorPanelClass && (
           <div className="absolute bottom-3 left-3 flex gap-2 items-center z-10 bg-white/80 px-2 py-1">
             {product.colors.slice(0, 5).map((c) => {
@@ -62,7 +57,6 @@ export default function ProductCard({ product, activeColor }) {
         )}
       </div>
 
- 
       <div className="p-4 text-center bg-white border-2 border-neutral-100 rounded-md shadow-sm">
         {hovered ? (
           <div className="flex flex-col justify-between items-center cursor-pointer">
@@ -98,7 +92,6 @@ export default function ProductCard({ product, activeColor }) {
 
             <div className="flex justify-center items-center text-[#FFC600] text-sm my-2">
               <Rating value={product.ratingValue} count={product.ratingCount} />
-
             </div>
       
             <div className="flex items-center justify-center gap-2 flex-wrap">
