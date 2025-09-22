@@ -1,6 +1,6 @@
 # Product Listing Page
 
-A frontend internship test project for SoftDef. Built a product listing page based on the provided Figma design.
+Built a Fully Responsive Product Listing page with sorting , filtering based on color and popularity etc.Used reusable components .Please go the below link and check it out...😃
 
 ## Live Demo
 [View Demo](https://e-shop-olive-one.vercel.app/)
