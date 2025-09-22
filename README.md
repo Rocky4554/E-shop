@@ -3,7 +3,7 @@
 A frontend internship test project for SoftDef. Built a product listing page based on the provided Figma design.
 
 ## Live Demo
-[View Demo](YOUR_DEPLOYMENT_URL_HERE)
+[View Demo](https://e-shop-olive-one.vercel.app/)
 
 ## Screenshots
 
