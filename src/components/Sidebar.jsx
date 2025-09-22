@@ -246,10 +246,10 @@ export default function Sidebar({
         </div>
 
         {/* Reset Filters */}
-        <div className="mt-6">
+        <div className="mt-6 sticky bottom-0">
           <button
             onClick={onResetFilters}
-            className="px-3 py-2 bg-gray-100 rounded text-sm cursor-pointer"
+            className="px-3 py-2 bg-gray-100 rounded cursor-pointer text-[20px] font-poppins font-[500] shadow"
           >
             Reset Filters
           </button>

@@ -104,7 +104,7 @@ const products = [
     discountPercent: 25,
     ratingValue: 4.3,
     ratingCount: 109,
-    isHot: false,
+    isHot: true,
     colors: ["white"],
     category: "Sneakers",
     size: "10",
@@ -344,12 +344,12 @@ const products = [
     discountPercent: 20,
     ratingValue: 4.3,
     ratingCount: 36,
-    isHot: false,
+    isHot: true,
     colors: ["black"],
     category: "Bag",
     size: "Small",
     gender: "Female",
-    imageUrl: "https://ik.imagekit.io/raunakImageKIt/Products/bag3.jpg?tr=w-400,h-400,bg-9CA3AF"
+    imageUrl: "public/products/handbag3.jpg"
   },
   {
     id: 23,
