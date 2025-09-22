@@ -103,7 +103,7 @@ export default function ProductCard({ product, activeColor }) {
       
             <div className="flex items-center justify-center gap-2 flex-wrap">
               <div className="text-[#40BFFF] font-bold">
-                Rs. {product.discountPrice}
+                 ${product.discountPrice}
               </div>
               <div className="text-sm text-gray-400 line-through">
                 Rs. {product.price}
