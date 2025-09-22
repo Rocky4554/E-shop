@@ -221,7 +221,7 @@ const products = [
     category: "Bag",
     size: "Large",
     gender: "Female",
-    imageUrl: "public/products/bag3.jpeg"
+    imageUrl: "/products/bag3.jpeg"
   },
   {
     id: 15,
@@ -253,7 +253,7 @@ const products = [
     category: "Accessories",
     size: "22mm",
     gender: "Male",
-    imageUrl: "public/products/watch.jpeg"
+    imageUrl: "/products/watch.jpeg"
   },
   {
     id: 17,
@@ -269,7 +269,7 @@ const products = [
     category: "Bag",
     size: "Large",
     gender: "Male",
-    imageUrl: "public/products/vinatgebag.jpeg"
+    imageUrl: "/products/vinatgebag.jpeg"
   },
   {
     id: 18,
@@ -285,7 +285,7 @@ const products = [
     category: "Accessories",
     size: "L",
     gender: "Male",
-    imageUrl: "https://picsum.photos/seed/18/600/400"
+    imageUrl: "/products/sobks.jpeg"
   },
   {
     id: 19,
@@ -301,7 +301,7 @@ const products = [
     category: "Sneakers",
     size: "9",
     gender: "Male",
-    imageUrl: "public/products/sneakrs.webp"
+    imageUrl: "/products/sneakrs.webp"
   },
   {
     id: 20,
@@ -317,7 +317,7 @@ const products = [
     category: "Bag",
     size: "Medium",
     gender: "Female",
-    imageUrl: "public/products/bag5.jpg"
+    imageUrl: "/products/bag5.jpg"
   },
   {
     id: 21,
@@ -333,7 +333,7 @@ const products = [
     category: "Sneakers",
     size: "10",
     gender: "Male",
-    imageUrl: "public/products/rebook.jpeg"
+    imageUrl: "/products/rebook.jpeg"
   },
   {
     id: 22,
@@ -349,7 +349,7 @@ const products = [
     category: "Bag",
     size: "Small",
     gender: "Female",
-    imageUrl: "public/products/handbag3.jpg"
+    imageUrl: "/products/handbag3.jpg"
   },
   {
     id: 23,
@@ -365,7 +365,7 @@ const products = [
     category: "Clothing",
     size: "M",
     gender: "Male",
-    imageUrl: "public/products/lastshoe.png"
+    imageUrl: "/products/lastshoe.png"
   },
   {
     id: 24,
@@ -381,7 +381,7 @@ const products = [
     category: "Footwear",
     size: "8",
     gender: "Female",
-    imageUrl: "public/products/slides.webp"
+    imageUrl: "/products/slides.webp"
   }
 ];
 

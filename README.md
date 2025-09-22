@@ -14,7 +14,7 @@ A frontend internship test project for SoftDef. Built a product listing page bas
 ![Mobile View](./public/sample/mobileView.png)
 
 ### Desktop Filter Functionality
-![Filters](./public/sample/desktopfilter.pngg)
+![Filters](./public/sample/desktopfilter.png)
 
 ### Mobile Filter Functionality
 ![Color Selection](./public/sample/mobilefilter.png)
