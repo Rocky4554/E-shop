@@ -32,7 +32,7 @@ export default function ProductCard({ product, activeColor }) {
           src={product.imageUrl}
           alt={product.name}
           className="sm:object-cover w-full h-full"
-          loading="lazy"
+          // loading="lazy"
         />
 
         {/*Color Options when select colors */}
