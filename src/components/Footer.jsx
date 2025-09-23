@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-y-10 p-2 sm:p-7">
 
           {/* pahale: Brand, Follow Us, Contact */}
-          <div className="grid grid-cols-3 gap-15 sm:gap-55">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-15 sm:gap-55">
            
             <div>
               <div className="flex items-center gap-3 mb-4 ">
@@ -18,6 +18,7 @@ export default function Footer() {
                   src="/images.png"
                   alt="Logo"
                   className="w-10 h-10 rounded-full border border-black"
+                  loading="lazy"
                 />
                 <h3 className="font-bold text-lg">E-Comm</h3>
               </div>
@@ -59,7 +60,7 @@ export default function Footer() {
           </div>
 
           {/* Row 2: Information, Service, My Account, Our Offers */}
-          <div className="grid grid-cols-4 gap-8 text-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-sm">
             
             <div>
               <h4 className="font-semibold text-base mb-3">Information</h4>
@@ -137,13 +138,13 @@ export default function Footer() {
               © 2018 Ecommerce theme by www.bisenbaev.com
             </p>
 
-         
-            <div className="flex flex-wrap sm:gap-2 justify- sm:justify-end">
+            <div className="flex flex-wrap sm:gap-2 justify-center-safe sm:justify-end">
               <div className="px-2 py-1">
                 <img
                   src="footer/westernunion.png"
                   alt="weternunion"
                   className="object-contain w-[39px] h-[23.16px]"
+                  loading="lazy"
                 />
               </div>
               <div className="px-2 py-1">
@@ -151,6 +152,7 @@ export default function Footer() {
                   src="footer/mastercard.png"
                   alt="weternunion"
                   className="object-contain w-[39px] h-[23.16px]"
+                  loading="lazy"
                 />
               </div>
               <div className="px-2 py-1">
@@ -165,6 +167,7 @@ export default function Footer() {
                   src="footer/visa.png"
                   alt="weternunion"
                   className="object-contain w-[39px] h-[23.16px]"
+                  loading="lazy"
                 />
               </div>
             </div>

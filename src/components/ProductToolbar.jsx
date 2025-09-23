@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid3X3, AlignJustify } from "lucide-react";
 
 const ProductToolbar = ({
   totalItems = 0,
@@ -10,7 +9,7 @@ const ProductToolbar = ({
   showSortDropdown = true,
   showItemsPerPageDropdown = true,
   showViewToggle = true,
-  currentView = "grid", 
+  currentView = "grid",
   onViewChange = () => {},
   sortOptions = [
     { value: "name_asc", label: "Name (A → Z)" },
@@ -20,36 +19,27 @@ const ProductToolbar = ({
     { value: "popularity_desc", label: "Popularity" },
   ],
   itemsPerPageOptions = [6, 12, 24],
-  className = ""
+  className = "",
 }) => {
-  const handleSortChange = (e) => {
-    onSortChange(e.target.value);
-  };
-
-  const handleItemsPerPageChange = (e) => {
-    onItemsPerPageChange(Number(e.target.value));
-  };
-
-  const handleViewToggle = (view) => {
-    onViewChange(view);
-  };
-
   return (
-    <div className={`md:flex flex-col md:flex-row items-center justify-between gap-3 mb-4 bg-neutral-100 h-[62.57px] rounded ${className}`}>
-      {/* Left section - Items count, Sort, Items per page */}
+    <div
+      className={`md:flex flex-col md:flex-row items-center justify-between gap-3 mb-4 
+        bg-neutral-100 h-[62.57px] rounded 
+        mx-2 sm:mx-4 md:mx-0 md:rounded-none
+        ${className}`}
+    >
+      {/* Left section */}
       <div className="flex items-center gap-8 p-4">
         {/* Items count */}
-        <div className="text-sm text-gray-900">
-          {totalItems} Items
-        </div>
+        <div className="text-sm text-gray-900">{totalItems} Items</div>
 
-        {/* Sort dropdown - hidden on mobile */}
+        {/* Sort dropdown */}
         {showSortDropdown && (
           <div className="hidden rounded-sm md:flex justify-between items-center">
             <label className="text-sm">Sort By</label>
             <select
               value={currentSort}
-              onChange={handleSortChange}
+              onChange={(e) => onSortChange(e.target.value)}
               className="shadow px-2 py-1 text-sm m-2 cursor-pointer"
             >
               {sortOptions.map((option) => (
@@ -67,7 +57,7 @@ const ProductToolbar = ({
             <label className="text-sm">Show</label>
             <select
               value={itemsPerPage}
-              onChange={handleItemsPerPageChange}
+              onChange={(e) => onItemsPerPageChange(Number(e.target.value))}
               className="shadow px-2 py-1 text-sm m-2 cursor-pointer"
             >
               {itemsPerPageOptions.map((option) => (
@@ -80,56 +70,73 @@ const ProductToolbar = ({
         )}
       </div>
 
-      {/* Right Part*/}
+      {/* Right section - View toggle */}
       {showViewToggle && (
-       
         <div className="flex items-center gap-3 p-2">
-                <div className="hidden md:flex items-center gap-2">
-                  {/* grid/list view icons */}
-                  <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-grip"
-                    >
-                      <circle cx="12" cy="5" r="1" />
-                      <circle cx="19" cy="5" r="1" />
-                      <circle cx="5" cy="5" r="1" />
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="19" cy="12" r="1" />
-                      <circle cx="5" cy="12" r="1" />
-                      <circle cx="12" cy="19" r="1" />
-                      <circle cx="19" cy="19" r="1" />
-                      <circle cx="5" cy="19" r="1" />
-                    </svg>
-                  </button>
-                  <button className="p-2 hover:bg-neutral-200 rounded hover:cursor-pointer hover:text-blue-600">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-text-align-justify"
-                    >
-                      <path d="M3 5h18" />
-                      <path d="M3 12h18" />
-                      <path d="M3 19h18" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+          <div className="hidden md:flex items-center gap-2">
+            {/* Grid view button */}
+            <button
+              onClick={() => onViewChange("grid")}
+              className={`p-2 rounded hover:cursor-pointer ${
+                currentView === "grid"
+                  ? "bg-neutral-200 text-blue-600"
+                  : "hover:bg-neutral-200"
+              }`}
+            >
+              {/* grid icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-grip"
+              >
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="19" cy="5" r="1" />
+                <circle cx="5" cy="5" r="1" />
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="12" r="1" />
+                <circle cx="12" cy="19" r="1" />
+                <circle cx="19" cy="19" r="1" />
+                <circle cx="5" cy="19" r="1" />
+              </svg>
+            </button>
+
+            {/* List view button */}
+            <button
+              onClick={() => onViewChange("list")}
+              className={`p-2 rounded hover:cursor-pointer ${
+                currentView === "list"
+                  ? "bg-neutral-200 text-blue-600"
+                  : "hover:bg-neutral-200"
+              }`}
+            >
+              {/* list icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-text-align-justify"
+              >
+                <path d="M3 5h18" />
+                <path d="M3 12h18" />
+                <path d="M3 19h18" />
+              </svg>
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

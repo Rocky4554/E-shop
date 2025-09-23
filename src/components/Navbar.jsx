@@ -11,7 +11,7 @@ export default function Navbar() {
         
         {/* Logo */}
         <div className="flex items-center gap-2 cursor-pointer">
-           <img src="/images.png" alt="Logo" className="w-10 h-10 rounded-full border-black"/>
+           <img src="/images.png" alt="Logo" className="w-10 h-10 rounded-full border-black" loading="lazy"/>
           <h1 className="text-2xl font-bold text-gray-900">E-Comm</h1>
         </div>
 

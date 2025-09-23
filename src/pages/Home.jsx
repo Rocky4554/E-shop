@@ -6,9 +6,8 @@ import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
 import Footer from "../components/Footer";
 import ProductToolbar from "../components/ProductToolbar";
-import MobileFilterModal from "../components/MobileFilterModal";
-
-
+import { X, ArrowDownUp, Funnel, ArrowDownZA } from "lucide-react";
+import DualRangeSlider from "../components/PriceSlider";
 
 function useQueryState(defaults) {
   const [state, setState] = useState(() => {
@@ -232,41 +231,42 @@ export default function Home() {
 
           {/* All contents*/}
           <div className="col-span-1 md:col-span-3 flex flex-col">
-                {/* Hero part */}
-              <div
-                className="w-full bg-[#29B6F6] flex items-center justify-between px-6 md:px-12 py-8 md:py-16 mb-2 md:mb-4"
-                style={{
-                  background: "linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%)",
-                }}
-              >
-                {/* Hero Text */}
-                <div className="md:flex-1 flex-1 text-left text-white max-w-md sm:mt-10">
-                  <h2 className="text-1xl font-semibold font-poppins md:text-3xl leading-tight">
-                    Adidas Men Running
-                  </h2>
-                  <h2 className="text-1xl font-semibold font-poppins md:text-3xl mt-1">
-                    Sneakers
-                  </h2>
-                  <p className="text-xs md:text-lg md:-mt-2">
-                    Performance and design. Taken right to the edge.
-                  </p>
+            {/* Hero part */}
+            <div
+              className="w-full bg-[#29B6F6] flex items-center justify-between px-6 md:px-12 py-8 md:py-16 mb-2 md:mb-4"
+              style={{
+                background: "linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%)",
+              }}
+            >
+              {/* Hero Text */}
+              <div className="md:flex-1 flex-1 text-left text-white max-w-md sm:mt-10">
+                <h2 className="text-1xl font-semibold font-poppins md:text-3xl leading-tight">
+                  Adidas Men Running
+                </h2>
+                <h2 className="text-1xl font-semibold font-poppins md:text-3xl mt-1">
+                  Sneakers
+                </h2>
+                <p className="text-xs md:text-lg md:-mt-2">
+                  Performance and design. Taken right to the edge.
+                </p>
 
-                  <button className="mt-6 py-2 rounded hover:bg-white/30 transition text-xs md:text-sm md:text-base md:font-semibold underline cursor-pointer">
-                    SHOP NOW
-                  </button>
-                </div>
-
-                {/* Hero Image */}
-                <div className="flex-1 flex justify-center md:justify-end mt-6 md:mt-0">
-                  <img
-                    src="products/shoe.png"
-                    alt="Adidas Running Sneaker"
-                    className="w-[500px] sm:w-[260px] md:w-[400px] lg:w-[500px] h-auto object-contain drop-shadow-xl sm:-mb-8"
-                  />
-                </div>
+                <button className="mt-6 py-2 rounded hover:bg-white/30 transition text-xs md:text-sm md:text-base md:font-semibold underline cursor-pointer">
+                  SHOP NOW
+                </button>
               </div>
 
-              {/* Product Toolbar */}
+              {/* Hero Image */}
+              <div className="flex-1 flex justify-center md:justify-end mt-6 md:mt-0">
+                <img
+                  src="products/shoe.png"
+                  alt="Adidas Running Sneaker"
+                  className="w-[500px] sm:w-[260px] md:w-[400px] lg:w-[500px] h-auto object-contain drop-shadow-xl sm:-mb-8"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Product Toolbar */}
             <ProductToolbar
               totalItems={sorted.length}
               currentSort={queryState.sort}
@@ -310,7 +310,7 @@ export default function Home() {
               </div>
 
               {/* Pagination */}
-              <div className="mt-6 flex justify-center mb-4">
+              <div className="mt-6 flex justify-center mb-4 px-2 sm:px-0">
                 <div className="w-full max-w-[1070px] h-[68.56px] bg-neutral-100 flex items-center justify-center rounded">
                   <Pagination
                     currentPage={currentPage}
@@ -324,50 +324,148 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Mobile Filter function */}
-      <MobileFilterModal
-        // Sort Modal Props
-        showSortModal={showSortModal}
-        onCloseSortModal={() => setShowSortModal(false)}
-        currentSort={queryState.sort}
-        onSortChange={handleSortChange}
+         {/* Mobile bottom bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 p-3 flex justify-around items-center md:hidden">
+        <button
+          onClick={() => setShowSortModal(true)}
+          className="flex justify-center flex-1 gap-2 py-2 mx-2 bg-neutral-100 text-gray-900 rounded font-medium"
+        >
+          <ArrowDownUp className="text-black" />
+          Sort
+        </button>
+        <button
+          onClick={() => setShowFilterModal(true)}
+          className="flex justify-center flex-1 gap-2 py-2 mx-2 bg-neutral-100 text-gray-900 rounded font-medium"
+        >
+          <Funnel className="text-black fill-stone-600" />
+          Filter
+        </button>
+      </div>
 
-        // Filter Modal Props  
-        showFilterModal={showFilterModal}
-        onCloseFilterModal={() => setShowFilterModal(false)}
+      {/* Sort on mobile */}
+      {showSortModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-center items-center">
+          <div className="bg-white w-80 rounded shadow-lg p-4 relative">
+            <button
+              onClick={() => setShowSortModal(false)}
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h3 className="text-lg font-semibold mb-3">Sort By</h3>
+            <select
+              value={queryState.sort}
+              onChange={(e) => {
+                handleSortChange(e);
+                setShowSortModal(false);
+              }}
+              className="w-full border px-2 py-2 rounded"
+            >
+              <option value="name_asc">Name (A → Z)</option>
+              <option value="name_desc">Name (Z → A)</option>
+              <option value="price_asc">Price (Low → High)</option>
+              <option value="price_desc">Price (High → Low)</option>
+              <option value="popularity_desc">Popularity</option>
+            </select>
+          </div>
+        </div>
+      )}
 
-        // Categories
-        categories={categories}
-        categoryCounts={categoryCounts}
-        totalItems={totalItems}
-        selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
+      {/* Filter on mobile */}
+      {showFilterModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-center items-center">
+          <div className="bg-white w-96 max-h-[90vh] overflow-y-auto rounded shadow-lg p-4 relative">
+            <button
+              onClick={() => setShowFilterModal(false)}
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h3 className="text-lg font-semibold mb-4">Filters</h3>
 
-     
-        selectedColor={queryState.color}
-        onColorChange={handleColorChange}
+            {/* Categories */}
+            <div className="mb-6">
+              <h4 className="font-medium mb-3">Categories</h4>
+              <div className="space-y-2">
+                <button
+                  onClick={() => setSelectedCategory("")}
+                  className={`block w-full text-left px-3 py-2 rounded ${
+                    !selectedCategory ? "bg-blue-500 text-white" : "bg-gray-100"
+                  }`}
+                >
+                  All Categories ({totalItems})
+                </button>
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`block w-full text-left px-3 py-2 rounded ${
+                      selectedCategory === category
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-100"
+                    }`}
+                  >
+                    {category} ({categoryCounts[category]})
+                  </button>
+                ))}
+              </div>
+            </div>
 
-      
-        priceRange={priceRange}
-        onPriceChange={setPriceRange}
+            {/* Colors */}
+            <div className="mb-6">
+              <h4 className="font-medium mb-3">Colors</h4>
+              <div className="flex flex-wrap gap-2">
+                {["Red", "Blue", "Green", "Black", "White", "Gray"].map(
+                  (color) => (
+                    <button
+                      key={color}
+                      onClick={() =>
+                        handleColorChange(
+                          queryState.color === color ? "" : color
+                        )
+                      }
+                      className={`px-3 py-1 rounded border text-sm ${
+                        queryState.color === color
+                          ? "bg-blue-500 text-white border-blue-500"
+                          : "bg-white text-gray-700 border-gray-300"
+                      }`}
+                    >
+                      {color}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
 
-      
-        brands={brands}
-        brandCounts={brandCounts}
-        selectedBrand={selectedBrand}
-        onBrandChange={handleBrandChange}
-        showBrands={true}
+            {/* Price Range */}
+            <div className="mb-6">
+              <DualRangeSlider
+                priceRange={priceRange}
+                onPriceChange={setPriceRange}
+              />
+            </div>
 
-      
-        genders={genders}
-        genderCounts={genderCounts}
-        selectedGender={selectedGender}
-        onGenderChange={handleGenderChange}
-        showGenders={true}
-
-      
-        onResetFilters={handleResetFilters}
-      />
+            {/* Action Buttons */}
+            <div className="space-y-3 bottom-0 left-0 right-0 bg-white p-4 border-t z-50">
+              <button
+                onClick={() => setShowFilterModal(false)}
+                className="w-full py-2 bg-sky-500 text-black rounded hover:bg-blue-600 font-medium"
+              >
+                Apply Filters
+              </button>
+              <button
+                onClick={() => {
+                  handleResetFilters();
+                  setShowFilterModal(false);
+                }}
+                className="w-full py-2 bg-red-500 text-black rounded hover:bg-red-300 font-medium"
+              >
+                Reset All Filters
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

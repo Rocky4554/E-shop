@@ -23,9 +23,9 @@ export default function Sidebar({
 }) {
   const [openCats, setOpenCats] = useState(true);
   const [openCategories, setOpenCategories] = useState(true);
-  const [More, setMore] = useState(false);
-  const [Brands, setBrands] = useState(true);
-  const [Gender, setGender] = useState(true);
+  const [More, setMore] = useState(true);
+  const [Brands, setBrands] = useState(false);
+  const [Gender, setGender] = useState(false);
 
   const colorOptions = [
     "blue",
